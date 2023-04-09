@@ -1,3 +1,6 @@
 if ($request->filled('filters.paired')) {
                     $q->whereRaw('select * from audits as a where audit.client_id = a.client_id and audit.pair = a.pair');
                 }
+SELECT id, auditor_id, mode, client_id, pair FROM audits s where (
+    select count(*) from audits as a where s.client_id = a.client_id and s.pair = a.pair and s.id !=a.id
+) ORDER BY `client_id` limit 10
