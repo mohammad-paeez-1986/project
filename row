@@ -1,0 +1,3 @@
+if ($request->filled('filters.paired')) {
+                    $q->whereRaw('select * from audits as a where audit.client_id = a.client_id and audit.pair = a.pair');
+                }
