@@ -1,5 +1,18 @@
-if ($request->filled('filters.paired')) {
-                    $q->whereRaw('select * from audits as a where audit.client_id = a.client_id and audit.pair = a.pair');
+preorder can only has pending|confirmed|rejected
+Trial can not be extended.
+Trial is activated at on register time.
+date time show in history: if activated_at exists "start -> expire" else "ordered_at"
+
+Front:
+    Extend:
+        !trial && !preorder['confirmed'|'pending']
+    Select Plan:
+        trial|active|expired|rejected !preorder['confirmed'|'pending']
+Backend:
+    Add New Request:
+        trial|active|expired|rejected, !preorder['confirmed'|'pending']
+        only current is active is_preorder = true
+------------------------------
                 }
 SELECT id, auditor_id, mode, client_id, pair FROM audits s where (
     select count(*) from audits as a where s.client_id = a.client_id and s.pair = a.pair and s.id !=a.id
