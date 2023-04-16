@@ -1,6 +1,5 @@
-preorder can only has pending|confirmed|rejected
 Trial can not be extended.
-Trial is activated at on register time.
+Trial is activated at register time.
 date time show in history: if activated_at exists "start -> expire" else "ordered_at"
 
 Front:
@@ -12,6 +11,12 @@ Backend:
     Add New Request:
         trial|active|expired|rejected, !preorder['confirmed'|'pending']
         only current is active is_preorder = true
+
+Change Status:
+    can not change to status
+    preorder can only has pending|confirmed|rejected
+
+pending: can be deleted
 ------------------------------
                 }
 SELECT id, auditor_id, mode, client_id, pair FROM audits s where (
