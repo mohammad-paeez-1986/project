@@ -22,3 +22,15 @@ pending: can be deleted
 SELECT id, auditor_id, mode, client_id, pair FROM audits s where (
     select count(*) from audits as a where s.client_id = a.client_id and s.pair = a.pair and s.id !=a.id
 ) ORDER BY `client_id` limit 10
+--------------------------------------
+function _similar_text(string $string, string $string2) {
+    $string = preg_replace('/\s+/', ' ', $string);
+    $string = strtolower($string);
+
+    $string2 = preg_replace('/\s+/', ' ', $string2);
+    $string2 = strtolower($string2);
+
+    similar_text($string, $string2, $perc);
+
+    return $perc;
+}
